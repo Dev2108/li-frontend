@@ -1,0 +1,14 @@
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.prettierrc
+*.pyc
+*.py~
+.env
+.env~
+.env.save
+.env.save.1
+.gitignore~
+
+.vscode/
+/node_modules
