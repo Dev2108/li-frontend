@@ -30,13 +30,13 @@ const UserResponse = () => {
     const config = {
       headers: { Authorization: `Bearer ${access}` },
       data : {
-          'id': id,
-          'resp':user_res
+          'id': queryParams.get('uuid'),
+          'resp':queryParams.get('resp')
         }
       };
      
       const url = Config.responseUrl;
-      if (user_res === '1' ){
+      if (queryParams.get('resp') === '1' ){
         try {
             const response = await axios.post(url, config);
             if (response.status === 205 || response.status === 200 ) {
