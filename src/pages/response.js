@@ -11,8 +11,12 @@ import { useSnackbar } from "notistack";
 const UserResponse = () => {
   const router = useRouter();
   const [name, setName] = useState(null);
-  const [isShow, setShow] = useState(false);
+  const [id, setID] = useState(null);
+  const [user_res, setResponse] = useState(null);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const [decline_reason, setReason] = useState('');
+  const [show, setShow] = useState(false);
+
 
   useEffect( async() => {
   
@@ -20,44 +24,84 @@ const UserResponse = () => {
   const access = localStorage.getItem("access");
   
     const queryParams = new URLSearchParams(window.location.search);
-    const id = queryParams.get('uuid');
-    const resp = queryParams.get('resp');
+    setID(queryParams.get('uuid'));
+    setResponse(queryParams.get('resp'));
     setName( queryParams.get('first_name'))
     const config = {
       headers: { Authorization: `Bearer ${access}` },
       data : {
           'id': id,
-          'resp':resp
+          'resp':user_res
         }
       };
      
       const url = Config.responseUrl;
-      debugger
-      try {
-          const response = await axios.post(url, config);
-          
-          console.log(response.status)
-          if (response.status === 205 || response.status === 200 ) {
-            setShow(true);
-            enqueueSnackbar("Response saved Successfully.",   {
-              variant: "success",
-              duration:'10000'
-            });
-          
-          }
-      }
-       catch (error) {
-        router.push({
-          pathname: "/404",
-        }); 
+      if (user_res === '1' ){
+        try {
+            const response = await axios.post(url, config);
+            if (response.status === 205 || response.status === 200 ) {
+              
+              enqueueSnackbar("Response saved Successfully.",   {
+                variant: "success",
+                duration:'10000'
+              });
+            
+            }
+        }
+        catch (error) {
+          router.push({
+            pathname: "/404",
+          }); 
 
+        }
       }
+      setShow(true);
       
     
   }, []);
 
+  const handleChange = (e) => {
+    let data =  e.target.value;
+    setReason(data);
+   
+  }
 
-  
+  const onSubmit = async(e) => {
+    const access = localStorage.getItem("access");
+    const config = {
+      headers: { Authorization: `Bearer ${access}` },
+      data : {
+          'id': id,
+          'resp':user_res,
+          'decline_reason':decline_reason
+        }
+      };
+     
+      const url = Config.responseUrl;
+      
+        try {
+            const response = await axios.post(url, config);
+            if (response.status === 205 || response.status === 200 ) {
+              
+              enqueueSnackbar("Response saved Successfully.",   {
+                variant: "success",
+                duration:'10000'
+              });
+            
+            }
+        }
+        catch (error) {
+          router.push({
+            pathname: "/404",
+          }); 
+
+        }
+      
+   
+  }
+
+
+console.log(decline_reason)  ;
   return(
   <>
   
@@ -75,8 +119,9 @@ const UserResponse = () => {
         
       }}
     >
-      {isShow &&
+      
       <Container maxWidth="md">
+        { show &&
         <Box
           sx={{
             alignItems: "left",
@@ -92,21 +137,68 @@ const UserResponse = () => {
           Hi {name},
           </Typography>
          <br/>
-          <Typography align="left" color="textPrimary" >
-          Thank you! We will contact you shortly. 
-          </Typography>
-          <br/>
-          <Typography align="left" color="textPrimary" >
-          If you would like to expedite the process please click on Apply link below and upload your profile. 
-          </Typography>
-          <a href= 'https://apply.mindfiresolutions.com/apply'>APPLY  NOW</a>
-          <br/>
+         { user_res === '1'?
+          <div>
+        
+              <Typography align="left" color="textPrimary" >
+              Thank you! We will contact you shortly. 
+         
+              </Typography>
+              <br/>
+              <Typography align="left" color="textPrimary" sx={{mb:1}}>
+              If you would like to expedite the process please click on Apply link below and upload your profile. 
+              </Typography>
+
+          </div>
+          :
+              <div>
+              
+              <textarea
+                value={decline_reason}
+                onChange={handleChange}
+                rows={5}
+                cols={50}
+                placeholder={"Why would you not want to apply?"}
+              />
+              <br/>
+              <Button
+                      sx ={{ mr:0 , mb:3}}
+                      variant="contained"
+                      color="secondary"
+                      size="small"
+                      type="submit"
+
+
+                      onClick={onSubmit}
+                      // disabled={!isfileUploaded}
+                    >
+                      Submit
+                    </Button>
+            </div>
+            
+          } 
+            <a  href= 'https://apply.mindfiresolutions.com/apply' style={{'text-decoration':'none',width:'20%'}}><Button
+                      sx ={{ mr:0 , }}
+                      variant="contained"
+                      color="secondary"
+                      size="small"
+                      type="submit"
+
+
+                      // onClick={saveData}
+                      // disabled={!isfileUploaded}
+                    >
+                      APPLY NOW
+                    </Button></a>
+            <br/>
+         
           <p>Thanks</p>
           <p>Mindfire Soulitons</p>          
           
         </Box>
+      }
       </Container>
-        }
+        
     </Box>
 
   </>
