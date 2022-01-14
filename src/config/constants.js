@@ -1,4 +1,4 @@
-const BASE_URL = 'https://li-parser.herokuapp.com/api'
+const BASE_URL = 'https://li-parser.herokuapp.com/'
 
 class  Config  {
 
@@ -11,6 +11,7 @@ class  Config  {
     static shortlistUrl = `${BASE_URL}/shortlist/`;
     static candidateListToolbarUrl = `${BASE_URL}/link/?`;
     static userUrl = `${BASE_URL}/user/`;
+    static excelUserListUrl = `${BASE_URL}/excel_user_list/`;
   
 }
   export default Config;

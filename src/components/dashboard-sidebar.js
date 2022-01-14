@@ -20,11 +20,11 @@ const items = [
     icon: <UserIcon fontSize="small" />,
     title: "Account",
   },
-  // {
-  //   href: "/upload_file",
-  //   icon: <UserIcon fontSize="small" />,
-  //   title: "Upload File",
-  // },
+  {
+    href: "/response-history",
+    icon: <UsersIcon fontSize="small" />,
+    title: "Response History",
+  },
 ];
 
 

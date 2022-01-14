@@ -1,5 +1,13 @@
 {
+  "/404": "pages/404.html",
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
+  "/account": "pages/account.html",
+  "/": "pages/index.html",
+  "/login": "pages/login.html",
+  "/profile": "pages/profile.html",
+  "/register": "pages/register.html",
+  "/response-history": "pages/response-history.html",
+  "/response": "pages/response.html",
   "/_error": "pages/_error.js"
 }

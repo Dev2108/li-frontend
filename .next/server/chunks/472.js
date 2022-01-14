@@ -316,6 +316,13 @@ const items = [
             fontSize: "small"
         }),
         title: "Account"
+    },
+    {
+        href: "/response-history",
+        icon: /*#__PURE__*/ jsx_runtime_.jsx(Users, {
+            fontSize: "small"
+        }),
+        title: "Response History"
     }, 
 ];
 const DashboardSidebar = (props)=>{
@@ -496,7 +503,7 @@ const DashboardLayout = (props)=>{
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-const BASE_URL = 'https://li-parser.herokuapp.com/api';
+const BASE_URL = 'https://li-parser.herokuapp.com/';
 class Config {
     static responseUrl = `${BASE_URL}/response/`;
     static registerUrl = `${BASE_URL}/register/`;
@@ -507,6 +514,7 @@ class Config {
     static shortlistUrl = `${BASE_URL}/shortlist/`;
     static candidateListToolbarUrl = `${BASE_URL}/link/?`;
     static userUrl = `${BASE_URL}/user/`;
+    static excelUserListUrl = `${BASE_URL}/excel_user_list/`;
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Config);
 
