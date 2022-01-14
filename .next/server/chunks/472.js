@@ -503,7 +503,7 @@ const DashboardLayout = (props)=>{
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-const BASE_URL = 'https://li-parser.herokuapp.com/';
+const BASE_URL = 'https://li-parser.herokuapp.com/api';
 class Config {
     static responseUrl = `${BASE_URL}/response/`;
     static registerUrl = `${BASE_URL}/register/`;

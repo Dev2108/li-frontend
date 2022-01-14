@@ -87,7 +87,9 @@ export const CustomerListResults = ({
         setcandidate(response.data.results);
       })
       .catch((err) => {
-        console.log("Exception in customer.js", err.response);
+        router.push({
+          pathname: "/login",
+        }); 
       });
   };
 

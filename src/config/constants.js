@@ -1,4 +1,4 @@
-const BASE_URL = 'https://li-parser.herokuapp.com/'
+const BASE_URL = 'https://li-parser.herokuapp.com/api'
 
 class  Config  {
 
